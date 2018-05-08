@@ -46,7 +46,7 @@ function setTimer() {
 }
 
 let timer = setTimer()
-
+   
 document.addEventListener('visibilitychange', function(e){
     if (document.hidden) {
         window.clearInterval(timer)
