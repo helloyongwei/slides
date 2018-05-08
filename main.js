@@ -1,17 +1,3 @@
-
-
-let n 
-Init()
-
-setInterval(()=>{
-    makeLeave(getImage(n))
-        .one('transitionend', (e)=>{
-            makeEnter($(e.currentTarget))
-        })
-    makeCurrent(getImage(n+1))
-    n += 1
-}, 3000)
-
 function getImage(n){
     return $(`.images > img:nth-child(${x(n)})`)
 }
@@ -43,3 +29,28 @@ function makeLeave($node) {
 function makeEnter($node) {
     return $node.removeClass('leave current').addClass('enter')
 }
+
+
+let n 
+Init()
+
+function setTimer() {
+    return setInterval(()=>{
+        makeLeave(getImage(n))
+            .one('transitionend', (e)=>{
+                makeEnter($(e.currentTarget))
+            })
+        makeCurrent(getImage(n+1))
+        n += 1
+    }, 2000)
+}
+
+let timer = setTimer()
+
+document.addEventListener('visibilitychange', function(e){
+    if (document.hidden) {
+        window.clearInterval(timer)
+    } else {
+        timer = setTimer()
+    }
+})
